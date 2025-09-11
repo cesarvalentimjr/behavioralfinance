@@ -91,10 +91,6 @@ def init_session_state():
     if 'current_block' not in st.session_state:
         st.session_state.current_block = 1
     
-    # Nome do aluno
-    if 'student_name' not in st.session_state:
-        st.session_state.student_name = ""
-
     # Estados do Bloco 1
     if 'block1_round' not in st.session_state:
         st.session_state.block1_round = 0
@@ -110,10 +106,6 @@ def init_session_state():
         st.session_state.block1_simulation_started = False
     if 'block1_revealed_group' not in st.session_state:
         st.session_state.block1_revealed_group = None
-    if 'block1_resposta_estudo_caso' not in st.session_state:
-        st.session_state.block1_resposta_estudo_caso = ""
-    if 'block1_resposta_reflexao' not in st.session_state:
-        st.session_state.block1_resposta_reflexao = ""
     
     # Estados do Bloco 2
     if 'block2_show_result' not in st.session_state:
@@ -122,23 +114,6 @@ def init_session_state():
         st.session_state.block2_gains_choice = None
     if 'block2_losses_choice' not in st.session_state:
         st.session_state.block2_losses_choice = None
-    if 'block2_resposta_perguntas_grupo' not in st.session_state:
-        st.session_state.block2_resposta_perguntas_grupo = ""
-    if 'block2_resposta_reflexao' not in st.session_state:
-        st.session_state.block2_resposta_reflexao = ""
-
-    # Estados do Bloco 3
-    if 'block3_recommendation' not in st.session_state:
-        st.session_state.block3_recommendation = ""
-    if 'block3_resposta_reflexao' not in st.session_state:
-        st.session_state.block3_resposta_reflexao = ""
-
-    # Estados do Bloco 4
-    if 'block4_action_plan' not in st.session_state:
-        st.session_state.block4_action_plan = ""
-    if 'block4_resposta_reflexao_final' not in st.session_state:
-        st.session_state.block4_resposta_reflexao_final = ""
-
 
 # Dados para os grupos do Bloco 1
 RATIONAL_INFO = [
@@ -205,8 +180,6 @@ def render_block1():
     """Renderiza o Bloco 1 - Fundamentos e Ruído"""
     st.markdown('<h2 class="block-header">📌 Bloco 1 – Fundamentos e Ruído</h2>', unsafe_allow_html=True)
     
-    st.session_state.student_name = st.text_input("Seu Nome:", value=st.session_state.student_name, key="student_name_block1")
-
     # Contexto
     st.markdown("""
     <div class="context-box">
@@ -228,13 +201,6 @@ def render_block1():
         </ul>
     </div>
     """, unsafe_allow_html=True)
-
-    st.session_state.block1_resposta_estudo_caso = st.text_area(
-        "Suas respostas sobre o Estudo de Caso (Bloco 1):",
-        value=st.session_state.block1_resposta_estudo_caso,
-        height=150,
-        key="block1_resposta_estudo_caso"
-    )
     
     # Exercício Prático
     st.markdown("### Exercício Prático: Simulação de Mercado")
@@ -324,17 +290,10 @@ def render_block1():
         <h3 style="color: #374151; margin-bottom: 0.5rem;">Reflexão em Grupo</h3>
         <ul>
             <li>Como o ruído observado na simulação se conecta com decisões contábeis reais?</li>
-            <li>Se você fosse auditor, como lidaria com relatórios baseados em premissas influenciadas pelo “efeito manada”?</li>
+            <li>Se você fosse auditor, como lidaria com relatórios baseados em premissas influenciadas pelo "efeito manada"?</li>
         </ul>
     </div>
     """, unsafe_allow_html=True)
-
-    st.session_state.block1_resposta_reflexao = st.text_area(
-        "Suas respostas sobre a Reflexão em Grupo (Bloco 1):",
-        value=st.session_state.block1_resposta_reflexao,
-        height=150,
-        key="block1_resposta_reflexao"
-    )
 
 def handle_group_selection(group):
     """Manipula a seleção de grupo no Bloco 1"""
@@ -384,8 +343,6 @@ def render_block2():
     """Renderiza o Bloco 2 - Prospect Theory"""
     st.markdown('<h2 class="block-header">📌 Bloco 2 – Prospect Theory, Heurísticas e Vieses</h2>', unsafe_allow_html=True)
     
-    st.session_state.student_name = st.text_input("Seu Nome:", value=st.session_state.student_name, key="student_name_block2")
-
     # Contexto
     st.markdown("""
     <div class="context-box">
@@ -405,13 +362,6 @@ def render_block2():
         </ul>
     </div>
     """, unsafe_allow_html=True)
-
-    st.session_state.block2_resposta_perguntas_grupo = st.text_area(
-        "Suas respostas sobre as Perguntas aos Grupos (Bloco 2):",
-        value=st.session_state.block2_resposta_perguntas_grupo,
-        height=150,
-        key="block2_resposta_perguntas_grupo"
-    )
     
     # Exercício Prático
     st.markdown("### Exercício Prático: Questionário de Prospect Theory")
@@ -482,19 +432,10 @@ def render_block2():
     </div>
     """, unsafe_allow_html=True)
 
-    st.session_state.block2_resposta_reflexao = st.text_area(
-        "Suas respostas sobre a Reflexão em Grupo (Bloco 2):",
-        value=st.session_state.block2_resposta_reflexao,
-        height=150,
-        key="block2_resposta_reflexao"
-    )
-
 def render_block3():
     """Renderiza o Bloco 3 - Análise de Mercado"""
     st.markdown('<h2 class="block-header">📌 Bloco 3 – Análise de Mercado e Vieses Cognitivos</h2>', unsafe_allow_html=True)
     
-    st.session_state.student_name = st.text_input("Seu Nome:", value=st.session_state.student_name, key="student_name_block3")
-
     # Contexto
     st.markdown("""
     <div class="context-box">
@@ -579,13 +520,14 @@ def render_block3():
     </div>
     """, unsafe_allow_html=True)
     
-    st.session_state.block3_recommendation = st.text_area(
+    recommendation = st.text_area(
         "Sua análise e recomendação:",
-        value=st.session_state.block3_recommendation,
         placeholder="Descreva sua análise considerando os vieses comportamentais...",
-        height=100,
-        key="block3_recommendation"
+        height=100
     )
+    
+    if recommendation:
+        st.success("Análise registrada! Discuta com o grupo as diferentes perspectivas.")
     
     # Reflexão
     st.markdown("""
@@ -599,19 +541,10 @@ def render_block3():
     </div>
     """, unsafe_allow_html=True)
 
-    st.session_state.block3_resposta_reflexao = st.text_area(
-        "Suas respostas sobre a Reflexão em Grupo (Bloco 3):",
-        value=st.session_state.block3_resposta_reflexao,
-        height=150,
-        key="block3_resposta_reflexao"
-    )
-
 def render_block4():
     """Renderiza o Bloco 4 - Síntese e Reflexão"""
     st.markdown('<h2 class="block-header">📌 Bloco 4 – Síntese e Reflexão Final</h2>', unsafe_allow_html=True)
     
-    st.session_state.student_name = st.text_input("Seu Nome:", value=st.session_state.student_name, key="student_name_block4")
-
     # Resumo dos conceitos
     st.markdown("### Resumo dos Conceitos Abordados")
     
@@ -643,15 +576,15 @@ def render_block4():
     col1, col2 = st.columns(2)
     
     with col1:
-        noise_traders = st.slider("Noise Traders e Efeito Manada", 1, 5, 3, key="noise_traders_slider")
-        prospect_theory = st.slider("Prospect Theory", 1, 5, 3, key="prospect_theory_slider")
+        noise_traders = st.slider("Noise Traders e Efeito Manada", 1, 5, 3)
+        prospect_theory = st.slider("Prospect Theory", 1, 5, 3)
     
     with col2:
-        heuristics = st.slider("Heurísticas e Vieses", 1, 5, 3, key="heuristics_slider")
-        practical_application = st.slider("Aplicação Prática", 1, 5, 3, key="practical_application_slider")
+        heuristics = st.slider("Heurísticas e Vieses", 1, 5, 3)
+        practical_application = st.slider("Aplicação Prática", 1, 5, 3)
     
     # Gráfico de autoavaliação
-    if st.button("Gerar Gráfico de Autoavaliação", key="generate_assessment_chart"):
+    if st.button("Gerar Gráfico de Autoavaliação"):
         assessment_data = {
             'Conceito': ['Noise Traders', 'Prospect Theory', 'Heurísticas', 'Aplicação Prática'],
             'Nota': [noise_traders, prospect_theory, heuristics, practical_application]
@@ -672,13 +605,14 @@ def render_block4():
     # Plano de ação
     st.markdown("### Plano de Ação Pessoal")
     
-    st.session_state.block4_action_plan = st.text_area(
+    action_plan = st.text_area(
         "Como você aplicará esses conhecimentos na sua prática profissional?",
-        value=st.session_state.block4_action_plan,
         placeholder="Descreva ações específicas que você pretende implementar...",
-        height=150,
-        key="block4_action_plan"
+        height=150
     )
+    
+    if action_plan:
+        st.success("Plano de ação registrado!")
     
     # Reflexão final
     st.markdown("""
@@ -692,13 +626,6 @@ def render_block4():
     </div>
     """, unsafe_allow_html=True)
     
-    st.session_state.block4_resposta_reflexao_final = st.text_area(
-        "Suas respostas sobre a Reflexão Final em Grupo (Bloco 4):",
-        value=st.session_state.block4_resposta_reflexao_final,
-        height=150,
-        key="block4_resposta_reflexao_final"
-    )
-
     # Recursos adicionais
     st.markdown("### Recursos Adicionais")
     
@@ -717,73 +644,6 @@ def render_block4():
         - [IASB - International Accounting Standards Board](https://www.ifrs.org/)
         """)
 
-def generate_report():
-    report_content = f"""
-Relatório de Estudos de Contabilidade Comportamental
-Nome do Aluno: {st.session_state.student_name if st.session_state.student_name else 'Não Informado'}
-Data: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}
-
-================================================================================
-BLOCO 1 – Fundamentos e Ruído
-================================================================================
-
-Estudo de Caso: Crise de 2008 - Suas Respostas:
-{st.session_state.block1_resposta_estudo_caso if st.session_state.block1_resposta_estudo_caso else 'Nenhuma resposta fornecida.'}
-
-Exercício Prático: Simulação de Mercado
-Grupo Selecionado: {st.session_state.block1_selected_group if st.session_state.block1_selected_group else 'Nenhum grupo selecionado.'}
-Preços Registrados:
-"""
-    if st.session_state.block1_prices_log:
-        for entry in st.session_state.block1_prices_log:
-            report_content += f"  {entry['name']}: R${entry['valor']:.2f}\n"
-    else:
-        report_content += "  Nenhum preço registrado.\n"
-
-    report_content += f"""
-Reflexão em Grupo - Suas Respostas:
-{st.session_state.block1_resposta_reflexao if st.session_state.block1_resposta_reflexao else 'Nenhuma resposta fornecida.'}
-
-================================================================================
-BLOCO 2 – Prospect Theory, Heurísticas e Vieses
-================================================================================
-
-Perguntas aos Grupos - Suas Respostas:
-{st.session_state.block2_resposta_perguntas_grupo if st.session_state.block2_resposta_perguntas_grupo else 'Nenhuma resposta fornecida.'}
-
-Exercício Prático: Questionário de Prospect Theory
-Escolha no Cenário de Ganhos: {st.session_state.block2_gains_choice if st.session_state.block2_gains_choice else 'Nenhuma escolha.'}
-Escolha no Cenário de Perdas: {st.session_state.block2_losses_choice if st.session_state.block2_losses_choice else 'Nenhuma escolha.'}
-
-Reflexão em Grupo - Suas Respostas:
-{st.session_state.block2_resposta_reflexao if st.session_state.block2_resposta_reflexao else 'Nenhuma resposta fornecida.'}
-
-================================================================================
-BLOCO 3 – Análise de Mercado e Vieses Cognitivos
-================================================================================
-
-Atividade Prática: Sua Análise e Recomendação:
-{st.session_state.block3_recommendation if st.session_state.block3_recommendation else 'Nenhuma resposta fornecida.'}
-
-Reflexão em Grupo - Suas Respostas:
-{st.session_state.block3_resposta_reflexao if st.session_state.block3_resposta_reflexao else 'Nenhuma resposta fornecida.'}
-
-================================================================================
-BLOCO 4 – Síntese e Reflexão Final
-================================================================================
-
-Plano de Ação Pessoal:
-{st.session_state.block4_action_plan if st.session_state.block4_action_plan else 'Nenhum plano de ação fornecido.'}
-
-Reflexão Final em Grupo - Suas Respostas:
-{st.session_state.block4_resposta_reflexao_final if st.session_state.block4_resposta_reflexao_final else 'Nenhuma resposta fornecida.'}
-
-================================================================================
-FIM DO RELATÓRIO
-================================================================================
-"""
-    return report_content
-
 def main():
     """Função principal da aplicação"""
     init_session_state()
@@ -799,14 +659,6 @@ def main():
         render_block3()
     elif st.session_state.current_block == 4:
         render_block4()
-
-    st.sidebar.markdown("--- ")
-    st.sidebar.download_button(
-        label="📥 Gerar Relatório TXT",
-        data=generate_report(),
-        file_name=f"relatorio_contabilidade_comportamental_{st.session_state.student_name.replace(' ', '_') if st.session_state.student_name else 'anonimo'}.txt",
-        mime="text/plain"
-    )
 
 if __name__ == "__main__":
     main()
